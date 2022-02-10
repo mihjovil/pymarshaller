@@ -1,0 +1,14 @@
+{
+    "name": "Jonas",
+    "mail": "jonas@gmail.com",
+    "status": true,
+    "friends": [
+        {
+            "name": "juan",
+            "age": 20
+        }, 
+        {
+            "name":"anna"
+        }
+    ]
+}
