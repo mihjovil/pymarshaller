@@ -2,15 +2,10 @@ import json
 import typing
 
 
-class Pyshaller():
-
-    """
-    TODO
-    Add an unmarshall list function that reads every element in the list and creates the dataclass from it returning a list of the object
-    Add the marshall function (That should be easier and recursive)
-    """
+class Pyshaller():   
 
     def __init__(self):
+        # Constant types that are simple to marshall
         self.simple_types = [
             'str',
             'bool',
@@ -23,13 +18,29 @@ class Pyshaller():
         ]
 
     def is_simple(self, candidate: typing.Any) -> bool:
+        """This function takes a specific type for parameter and decides whther it is a simple type or not
+
+        Args:
+            candidate (typing.Any): The candidate type to check if it is simple or not
+
+        Returns:
+            bool: True if the type is simple and should be added löike that to the JSON object or False if not.
+        """
         for t in self.simple_types:
             if t in str(candidate):
                 return True
         return False
 
     def unmarshall(self, struct: object, json_dict: typing.Dict) -> object:
-        # Dictionary of possible attributes of object
+        """This function takes a dataclass obejtc as well as a JSON in dictionary form. It takes all the fields in the dataclass and tries to match them to the elements in the JSON object
+
+        Args:
+            struct (object): The specific Dataclass that will be filled with the values of the JSON object.
+            json_dict (typing.Dict): The JSON object that contains the values of the dataclass.
+
+        Returns:
+            object: Returns an initilized dataclass of the same type as struct with the values that it could get out of the JSON dictionary.
+        """
         attributes = [a for a in dir(struct) if not a.startswith('__')]
         for a in attributes:
             print(type(json_dict))
@@ -41,7 +52,8 @@ class Pyshaller():
                     print(f'There is no {a} key in the dictionary')
         return struct
 
-    def unmarshall_list(self, struct: object, objects: typing.List[typing.Dict])-> typing.List[object]:    
+    def unmarshall_list(self, struct: object, objects: typing.List[typing.Dict])-> typing.List[object]:
+        # TODO continue with the documentation.
         answer = []
         for item in objects:
             temp_struct = struct()
