@@ -2,7 +2,7 @@ import json
 import typing
 
 
-class Pyshaller():   
+class Pyshaller():       
 
     def __init__(self):
         # Constant types that are simple to marshall
@@ -42,8 +42,7 @@ class Pyshaller():
             object: Returns an initilized dataclass of the same type as struct with the values that it could get out of the JSON dictionary.
         """
         attributes = [a for a in dir(struct) if not a.startswith('__')]
-        for a in attributes:
-            print(type(json_dict))
+        for a in attributes:            
             if a in json_dict.keys():
                 try:
                     value = json_dict[a]
@@ -53,20 +52,43 @@ class Pyshaller():
         return struct
 
     def unmarshall_list(self, struct: object, objects: typing.List[typing.Dict])-> typing.List[object]:
-        # TODO continue with the documentation.
+        """This method takes a list of objects in dictionary format and uses their values to fill a list of specified dataclasses that will return as answer
+
+        Args:
+            struct (object): The specified dataclass that will be filled using the values of the elements in the list of dictionaries
+            objects (typing.List[typing.Dict]): The list of dictionaries that will be unmarshall to create a list of dataclasses
+
+        Returns:
+            typing.List[object]: A list of data classes that contain the values from the list of dictionaries.
+        """
         answer = []
         for item in objects:
             temp_struct = struct()
             answer.append(self.unmarshall(temp_struct, item))
         return answer
 
-    def marshall(self, struct: object) -> typing.Dict:       
+    def marshall(self, struct: object) -> typing.Dict:
+        """Takes a dataclass and transforms it into a Dictionary in order to be used as JSON
+
+        Args:
+            struct (object): The dataclass instance that will transformed into a dictionary.
+
+        Returns:
+            typing.Dict A dictionray that contains the values form the dataclass object (struct).
+        """ 
         answer = {}
         answer = self.add_attributes_to_dict(answer, struct)
         return answer    
 
+    def add_attributes_to_dict(self, target: typing.Dict, struct: object) -> typing.Dict:
+        """This method takes a list of objects in dictionary format and uses their values to fill a list of specified dataclasses that will return as answer
 
-    def add_attributes_to_dict(self, target: typing.Dict, struct: object) -> typing.Dict:        
+        Args:
+            target (typing.Dict): The dictionary struct where the values will be stored
+            struct (object): The dataclass instance that will transformed into a dictionary.
+        Returns:
+            typing.Dict: The dictionary (target) with the values from the dataclass (struct)
+        """  
         attributes = [a for a in dir(struct) if not a.startswith('__')]
         for attr in attributes:
             attr_type = type(getattr(struct, attr))
