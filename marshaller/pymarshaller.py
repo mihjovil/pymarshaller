@@ -1,8 +1,7 @@
-import json
 import typing
 
 
-class Pyshaller():       
+class Pyshaller:
 
     def __init__(self):
         # Constant types that are simple to marshall
@@ -51,7 +50,7 @@ class Pyshaller():
                     print(f'There is no {a} key in the dictionary')
         return struct
 
-    def unmarshall_list(self, struct: object, objects: typing.List[typing.Dict])-> typing.List[object]:
+    def unmarshall_list(self, struct: object, objects: typing.List[typing.Dict]) -> typing.List[object]:
         """This method takes a list of objects in dictionary format and uses their values to fill a list of specified dataclasses that will return as answer
 
         Args:
