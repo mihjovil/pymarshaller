@@ -3,9 +3,9 @@ import sys
 path_root = Path(__file__).parents[1]
 sys.path.append(str(path_root))
 import unittest
-from utils.example.example_classes import Friend, Address, Person
+from marshaller.utils.example.example_classes import Friend, Address, Person
 import typing
-from pymarshaller import Pyshaller
+from marshaller.pymarshaller import Pyshaller
 import json
 
 # region helper functions
