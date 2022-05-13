@@ -1,16 +1,14 @@
-from pathlib import Path
-import sys
-path_root = Path(__file__).parents[1]
-sys.path.append(str(path_root))
 import unittest
-from marshaller.utils.example.example_classes import Friend, Address, Person
+from example.example_classes import Friend, Address, Person
 import typing
 from marshaller.pymarshaller import Pyshaller
 import json
 
+
 # region helper functions
 def createPyshaller() -> Pyshaller:
     return Pyshaller()
+
 
 def read_json_file(path: str) -> typing.Dict:
     """ Takes a path from a JSON file, reads the content and returns a dictionary with the values from the file
@@ -46,7 +44,7 @@ class TestPymarshaller(unittest.TestCase):
 
     def test_unmarshall(self):
         p = createPyshaller()
-        json_dict = read_json_file('utils/example/example_input.json')
+        json_dict = read_json_file('example/example_input.json')
         target = Person()
         p.unmarshall(target, json_dict)
         self.assertIsNotNone(target, "The dataclass is still None after unmarshall")
@@ -58,6 +56,7 @@ class TestPymarshaller(unittest.TestCase):
         target.address = p.unmarshall(Address(), target.address)
         self.assertNotEqual(address_type, type(target.address))
         print(target)
+
 
 if __name__ == '__main__':
     unittest.main()
