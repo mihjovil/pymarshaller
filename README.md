@@ -12,3 +12,29 @@ JSON in to a Python object unlike the marshaller functions in Golang. That means
 subclasses inside, in the first line these attributes will simply be a dictionary. It will require that dictionary
 to be "manually" unmarshalled using the same function that was used in the first place.
 
+## How to install?
+In any python environment or virtual environment just use the following line to install:
+
+`pip install git+https://github.com/mihjovil/pymarshaller`
+
+## How to use?
+
+In order to instantiate a `pymarshaller` tool, all you need is to import the module and create an Instance (It 
+is intended to work on dataclasses):
+
+```
+from marshaller.pymarshaller import Pyshaller
+marshaller = Pyshaller()
+```
+ The two important functions are:
+1. Marshall: Takes a dataclass and converts it into a JSON dictionary.
+2. Unmarshall: Takes a JSON dictionary and converts it into a dataclass object. The dataclass must have been declared
+in order to be used.
+
+For more information check the 
+<a href="https://github.com/mihjovil/pymarshaller/blob/main/marshaller/test/test_pymarshaller.py">examples</a> in the
+test files.
+
+
+## License
+<a href="https://choosealicense.com/licenses/mit/">MIT</a>
